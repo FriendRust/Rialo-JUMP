@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rialo Jump</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000;
+      font-family: 'Press Start 2P', cursive;
+    }
+    canvas {
+      border: 2px solid black;
+    }
+
+    #gameOverModal,
+    #mainMenu,
+    #howToPlayModal,
+    #controlsHint {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0,0,0,0.8);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      z-index: 20;
+    }
+    #gameOverModal.show,
+    #mainMenu.show,
+    #howToPlayModal.show,
+    #controlsHint.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    #gameOverModal h2, #mainMenu h1 {
+      margin: 0;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    #gameOverModal p, #howToPlayModal p {
+      margin: 0;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    #restartButton,
+    #howToPlayButton {
+      background-color: #FFD700;
+      border: none;
+      padding: 10px 20px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 5px;
+    }
+    #restartButton:hover,
+    #howToPlayButton:hover {
+      background-color: #FFC107;
+    }
+
+    #pauseBtn {
+      position: fixed;
+      top: 12px; right: 12px;
+      width: 40px; height: 40px;
+      border: 2px solid #000;
+      border-radius: 10px;
+      background: rgba(255,255,255,.9);
+      cursor: pointer;
+      z-index: 30;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #pauseBtn:active { transform: scale(0.96); }
+    #pauseBtn .bars { display: grid; grid-auto-flow: column; gap: 6px; }
+    #pauseBtn .bar { width: 6px; height: 18px; background:#000; border-radius:2px; }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="600" height="1200"></canvas>
+
+  <div id="mainMenu">
+    <h1>Rialo Jump</h1>
+    <p>Press Enter to Start</p>
+    <button id="howToPlayButton">How to Play</button>
+  </div>
+
+  <div id="howToPlayModal">
+    <p>Jump between platforms</p>
+    <p>Don’t fall down</p>
+    <p>Avoid spikes</p>
+    <p>Press Enter to return</p>
+  </div>
+
+  <div id="gameOverModal">
+    <h2>Game Over</h2>
+    <p id="finalScore">Score: 0</p>
+    <button id="restartButton">Restart</button>
+  </div>
+
+  <div id="controlsHint">
+    <p>Use A/D, Ф/В, or Arrows to move<br>Press Enter to restart</p>
+  </div>
+
+  <button id="pauseBtn" title="Pause/Resume">
+    <span class="bars"><span class="bar"></span><span class="bar"></span></span>
+  </button>
+
+  <script type="module" src="gameLogic.js?v=5"></script>
+  <script type="module" src="gameDesign.js?v=5"></script>
+</body>
+</html>
